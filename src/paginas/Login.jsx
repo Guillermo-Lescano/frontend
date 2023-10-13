@@ -45,7 +45,7 @@ const Login = () => {
         />
       </form>
 
-      <nav className="lg-flex lg:justify-between">
+      <nav className="lg:flex lg:justify-between">
         <Link
         className="flex text-center my-5 text-slate-500 uppercase text-sm"
           to='registrar'
