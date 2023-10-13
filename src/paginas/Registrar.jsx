@@ -19,6 +19,26 @@ const Registrar = () => {
       })
       return
     }
+
+    if(password !== repetirPassword){
+      setAlerta({
+        msg:'La contraseñas deben ser iguales',
+        error: true
+      })
+      return
+    }
+
+    if(password.length < 6){
+      setAlerta({
+        msg:'La contraseña debe tener mas de 6 caracteres',
+        error: true
+      })
+      return
+    }
+
+    //una vez validado todo esto creamos al usuario
+    console.log('creando...')
+
   }
 
   const {msg} = alerta
