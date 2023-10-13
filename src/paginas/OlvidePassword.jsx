@@ -35,12 +35,12 @@ const OlvidePassword = () => {
           className="flex text-center my-5 text-slate-500 uppercase text-sm"
           to="/"
         >
-          Ya tienes una cuenta? Inicia Sesion
+          ¿Ya tienes una cuenta? Inicia Sesion
         </Link>
         <Link
         className="flex text-center my-5 text-slate-500 uppercase text-sm"
           to='registrar'
-        >No tienes una cuenta? Regístrate</Link>
+        >¿No tienes una cuenta? Regístrate</Link>
       </nav>
     </>
   )

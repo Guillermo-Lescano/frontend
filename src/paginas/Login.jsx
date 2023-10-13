@@ -49,7 +49,7 @@ const Login = () => {
         <Link
         className="flex text-center my-5 text-slate-500 uppercase text-sm"
           to='registrar'
-        >No tienes una cuenta? Regístrate</Link>
+        >¿No tienes una cuenta? Regístrate</Link>
         <Link
         className="flex text-center my-5 text-slate-500 uppercase text-sm"
           to='/olvide-password'
