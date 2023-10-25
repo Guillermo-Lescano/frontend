@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Alert from "../components/Alert";
 import { Link } from "react-router-dom";
+import axios from 'axios'
 
 const Registrar = () => {
   const [nombre, setNombre] = useState("");
@@ -9,7 +10,7 @@ const Registrar = () => {
   const [repetirPassword, setRepetirPassword] = useState("");
   const [alerta, setAlerta] = useState({})
 
-  const handleSubmit = (e) =>{
+  const handleSubmit = async e =>{
     e.preventDefault()
 
     if([nombre, email, password, repetirPassword].includes('')){
@@ -35,9 +36,28 @@ const Registrar = () => {
       })
       return
     }
+    setAlerta({})
 
     //una vez validado todo esto creamos al usuario
-    console.log('creando...')
+    //si hacemos la consulta directamente con el endpoint que creamos en backen , no os deja subir las cosas por un tema de Cors
+    try {
+      const {data} = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/usuarios`, {nombre, email, password})
+      console.log('res', data)
+      //mostramos el mensaje que captamos de back y se lo muestra al usuario
+      setAlerta({
+        msg: data.msg,
+        error: false
+      })
+      setNombre('')
+      setEmail('')
+      setPassword('')
+      setRepetirPassword('')
+    } catch (error) {
+      setAlerta({
+        msg: error.response.data.msg,
+        error: true
+      })
+    }
 
   }
 
