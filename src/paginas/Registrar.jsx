@@ -39,7 +39,7 @@ const Registrar = () => {
     setAlerta({})
 
     //una vez validado todo esto creamos al usuario
-    //si hacemos la consulta directamente con el endpoint que creamos en backen , no os deja subir las cosas por un tema de Cors
+    //si hacemos la consulta directamente con el endpoint que creamos en backend , no nos deja subir las cosas por un tema de Cors
     try {
       const {data} = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/usuarios`, {nombre, email, password})
       console.log('res', data)
