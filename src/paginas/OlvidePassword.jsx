@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import Alert from "../components/Alert";
+import axios from "axios";
 
 const OlvidePassword = () => {
   const [email, setEmail] = useState("");
@@ -12,15 +13,25 @@ const OlvidePassword = () => {
     if (email === " " || email.length < 6) {
       setAlerta({
         msg: "El email es obligatorio",
-        error: true
+        error: true,
       });
       return;
     }
-
     //generamos email para la recuperacion
-
+    try {
+      const { data } = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/usuarios/olvide-password`,
+        { email });
+        setAlerta({
+          msg: data.msg,
+          error: false
+        })
+    } catch (error) {
+      setAlerta({
+        msg: error.response.data.msg,
+        error: true
+      })
+    }
   };
-
   const { msg } = alerta;
 
   return (
