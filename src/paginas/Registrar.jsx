@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Alert from "../components/Alert";
 import { Link } from "react-router-dom";
-import axios from 'axios'
+import clienteAxios from "../config/clienteAxios";
 
 const Registrar = () => {
   const [nombre, setNombre] = useState("");
@@ -41,7 +41,7 @@ const Registrar = () => {
     //una vez validado todo esto creamos al usuario
     //si hacemos la consulta directamente con el endpoint que creamos en backend , no nos deja subir las cosas por un tema de Cors
     try {
-      const {data} = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/usuarios`, {nombre, email, password})
+      const {data} = await clienteAxios.post(`/usuarios`, {nombre, email, password})
       console.log('res', data)
       //mostramos el mensaje que captamos de back y se lo muestra al usuario
       setAlerta({
