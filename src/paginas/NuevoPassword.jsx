@@ -6,6 +6,9 @@ import Alert from "../components/Alert";
 const NuevoPassword = () => {
   const [alerta, setAlerta] = useState("");
   const [tokenValido, setTokenValido] = useState(false);
+  const [password, setPassword] = useState('')
+  const [passwordModificado, setPasswordModificado] = useState(false)
+
 
   const params = useParams();
   const { token } = params;
@@ -29,6 +32,36 @@ const NuevoPassword = () => {
     comprobarToken();
   }, []);
 
+  const handleSubmit = async (e) =>{
+    e.preventDefault()
+
+    if(password.length < 6){
+      setAlerta({
+        msg: 'El password debe ser minimos de 6 caracteres' ,
+        error: true
+      })
+      return
+    }
+
+    try {
+      const url = `${import.meta.env.VITE_BACKEND_URL}/api/usuarios/olvide-password/${token}`
+      const {data} = await axios.post(url, {password})
+      setAlerta({
+        msg: data.msg,
+        error: false
+      })
+      setPassword('')
+      setPasswordModificado(true)
+
+    } catch (error) {
+      setAlerta({
+        msg: error.response.data.msg,
+        error: true
+      })
+    }
+
+  }
+
   const {msg} = alerta
 
   return (
@@ -39,7 +72,7 @@ const NuevoPassword = () => {
       </h1>
       {msg && <Alert alerta={alerta}/>}
       {tokenValido && (
-        <form action="" className="my-10 bg-white shadow rounded-lg p-10">
+        <form onSubmit={handleSubmit} className="my-10 bg-white shadow rounded-lg p-10">
           <div className="m-5">
             <label
               htmlFor="password"
@@ -52,6 +85,8 @@ const NuevoPassword = () => {
               type="password"
               placeholder="Escribe tu nuevo password"
               className="w-full mt-3 p-2 border rounded-xl bg-gray-50"
+              value={password}
+              onChange={e => setPassword(e.target.value)}
             />
           </div>
 
@@ -63,6 +98,14 @@ const NuevoPassword = () => {
           />
         </form>
       )}
+           {passwordModificado && (
+          <Link
+          className="block text-center my-5 text-slate-500 uppercase text-sm"
+          to="/"
+        >
+         Inicia Sesion
+        </Link>
+        )}
     </>
   );
 };
