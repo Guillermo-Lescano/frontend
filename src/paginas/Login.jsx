@@ -20,10 +20,20 @@ const Login = () => {
       return
     }
 
+
+
     try {
+      const url = `/usuarios/login`
+      const {data} = await clienteAxios.post(url, {email, password})
+      console.log(data)
+      //Toda la info que recuperamos de data, lo vamos a guardar en un context para tener acceso a es ainfo de forma global
+      setAlerta({})
+      localStorage.setItem('token', data.token)
       
     } catch (error) {
-      console.log(error)
+      setAlerta({msg: error.response.data.msg,
+      error: true
+      })
     }
 
   }
