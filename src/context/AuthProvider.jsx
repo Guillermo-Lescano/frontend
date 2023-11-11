@@ -38,7 +38,8 @@ const AuthProvider = ({children}) => {
     return( //todo lo que este dentro del return es a lo cual podemos acceder
         <AuthContext.Provider
             value={{
-                setAuth
+                setAuth,
+                auth
             }}
         >
             {children}
