@@ -2,12 +2,15 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Alert from "../components/Alert";
 import clienteAxios from "../config/clienteAxios";
+import useAuth from "../hooks/useAuth";
 
 const Login = () => {
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [alerta, setAlerta] = useState({})
+
+  const {setAuth} = useAuth()
 
   const handleSubmit = async (e) =>{
     e.preventDefault()
@@ -29,6 +32,7 @@ const Login = () => {
       //Toda la info que recuperamos de data, lo vamos a guardar en un context para tener acceso a es ainfo de forma global
       setAlerta({})
       localStorage.setItem('token', data.token)
+      setAuth(data)
       
     } catch (error) {
       setAlerta({msg: error.response.data.msg,
