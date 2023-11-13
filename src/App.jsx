@@ -10,6 +10,7 @@ import OlvidePassword from "./paginas/OlvidePassword";
 import NuevoPassword from "./paginas/NuevoPassword";
 import ConfirmarCuenta from "./paginas/ConfirmarCuenta";
 import Proyectos from "./paginas/Proyectos";
+import NuevoProyecto from "./paginas/NuevoProyecto";
 
 import { AuthProvider } from "./context/AuthProvider";
 
@@ -26,8 +27,9 @@ const App = () => {
             <Route path="confirmar-cuenta/:id" element={<ConfirmarCuenta />} />
           </Route>
           //Area Privada
-          <Route path="/proyectos" element={<RutaProtegida />}> //este componente lo que ahce es tene rla logica para proteger a los proximos componentes
+          <Route path="/proyectos" element={<RutaProtegida />}> //este componente lo que hace es tene rla logica para proteger a los proximos componentes
             <Route index element={<Proyectos />} />
+            <Route path='crear-proyecto' element={<NuevoProyecto />} />
           </Route>
         </Routes>
       </AuthProvider>
