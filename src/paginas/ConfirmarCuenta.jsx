@@ -17,7 +17,7 @@ const ConfirmarCuenta = () => {
       try {
         const url = `/usuarios/confirmar/${id}`
         const { data } = await clienteAxios(url)
-        console.log('data', data)
+        //console.log('data', data)
         setAlerta({
           msg: data.msg,
           error: false
@@ -26,7 +26,6 @@ const ConfirmarCuenta = () => {
         setCuentaConfirmada(true)
 
       } catch (error) {
-        console.log(error.response.data.msg)
         setAlerta({
           msg: error.response.data.msg, 
           error: true})

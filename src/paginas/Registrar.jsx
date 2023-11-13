@@ -42,7 +42,7 @@ const Registrar = () => {
     //si hacemos la consulta directamente con el endpoint que creamos en backend , no nos deja subir las cosas por un tema de Cors
     try {
       const {data} = await clienteAxios.post(`/usuarios`, {nombre, email, password})
-      console.log('res', data)
+      //console.log('res', data)
       //mostramos el mensaje que captamos de back y se lo muestra al usuario
       setAlerta({
         msg: data.msg,
