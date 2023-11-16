@@ -42,13 +42,14 @@ const FormularioProyecto = () => {
       </div>
       <div className="mb-5">
         <label
-          htmlFor="fecha"
+          htmlFor="fecha-entrega"
           className="text-gray-700 uppercase font-bold text-sm"
         >
           Fecha de Entrega
         </label>
-        <textarea
-            id='fecha'
+        <input
+            id='fecha-entrega'
+            type='date'
             className="border w-full p-2 mt-2 placeholder-gray-400 rounded-md"
             placeholder="Fecha de entrega del proyecto"
             value={fechaEntrega}
@@ -60,15 +61,17 @@ const FormularioProyecto = () => {
           htmlFor="cliente"
           className="text-gray-700 uppercase font-bold text-sm"
         >
-          Cliente
+          Nombre Cliente
         </label>
         <input
             id='cliente'
+            type="text"
             className="border w-full p-2 mt-2 placeholder-gray-400 rounded-md"
-            placeholder="Cliente del proyecto"
+            placeholder="Nombre del Cliente"
             value={cliente}
             onChange={e => setCliente(e.target.value)}
             />
+          <input type="submit" value='Crear proyecto' className="bg-sky-600 py-3 uppercase font-bold text-white rounded cursor-pointer bg-sky-700 transition-colors" />
       </div>
     </form>
   );
