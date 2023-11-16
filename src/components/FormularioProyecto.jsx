@@ -1,14 +1,35 @@
 import React, { useState } from "react";
+import useProyectos from "../hooks/useProyectos";
+import Alert from "./Alert";
 
 const FormularioProyecto = () => {
+  const [nombre, setNombre] = useState("");
+  const [descripcion, setDescripcion] = useState("");
+  const [fechaEntrega, setFechaEntrega] = useState("");
+  const [cliente, setCliente] = useState("");
 
-    const [nombre , setNombre] = useState('')
-    const [descripcion , setDescripcion] = useState('')
-    const [fechaEntrega , setFechaEntrega] = useState('')
-    const [cliente , setCliente] = useState('')
+  const {mostrarAlerta, alerta, submitProyecto} = useProyectos()
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+
+    if([nombre, descripcion, fechaEntrega, cliente].includes('')){
+      mostrarAlerta({
+        msg:'Todos los campos son obligatorios',
+        error: true
+      })
+      return
+    }
+    //Pasar los datos al Provider
+    submitProyecto({nombre, descripcion, fechaEntrega, cliente})
+  }
+
+  const { msg } = alerta
 
   return (
-    <form className="bg-white py-10 px-5 md:w-1/2 rounded-lg shadow">
+    
+    <form onSubmit={handleSubmit} className="bg-white py-10 px-5 md:w-1/2 rounded-lg shadow">
+      {msg && <Alert alerta={alerta}/>}
       <div className="mb-5">
         <label
           htmlFor="nombre"
@@ -17,13 +38,13 @@ const FormularioProyecto = () => {
           Nombre Proyecto
         </label>
         <input
-            id='nombre'
-            type="text"
-            className="border w-full p-2 mt-2 placeholder-gray-400 rounded-md"
-            placeholder="Nombre del proyecto"
-            value={nombre}
-            onChange={e => setNombre(e.target.value)}
-            />
+          id="nombre"
+          type="text"
+          className="border w-full p-2 mt-2 placeholder-gray-400 rounded-md"
+          placeholder="Nombre del proyecto"
+          value={nombre}
+          onChange={(e) => setNombre(e.target.value)}
+        />
       </div>
       <div className="mb-5">
         <label
@@ -33,12 +54,12 @@ const FormularioProyecto = () => {
           Descripcion
         </label>
         <textarea
-            id='descripcion'
-            className="border w-full p-2 mt-2 placeholder-gray-400 rounded-md"
-            placeholder="Descripcion del proyecto"
-            value={descripcion}
-            onChange={e => setDescripcion(e.target.value)}
-            />
+          id="descripcion"
+          className="border w-full p-2 mt-2 placeholder-gray-400 rounded-md"
+          placeholder="Descripcion del proyecto"
+          value={descripcion}
+          onChange={(e) => setDescripcion(e.target.value)}
+        />
       </div>
       <div className="mb-5">
         <label
@@ -48,13 +69,13 @@ const FormularioProyecto = () => {
           Fecha de Entrega
         </label>
         <input
-            id='fecha-entrega'
-            type='date'
-            className="border w-full p-2 mt-2 placeholder-gray-400 rounded-md"
-            placeholder="Fecha de entrega del proyecto"
-            value={fechaEntrega}
-            onChange={e => setFechaEntrega(e.target.value)}
-            />
+          id="fecha-entrega"
+          type="date"
+          className="border w-full p-2 mt-2 placeholder-gray-400 rounded-md"
+          placeholder="Fecha de entrega del proyecto"
+          value={fechaEntrega}
+          onChange={(e) => setFechaEntrega(e.target.value)}
+        />
       </div>
       <div className="mb-5">
         <label
@@ -64,14 +85,18 @@ const FormularioProyecto = () => {
           Nombre Cliente
         </label>
         <input
-            id='cliente'
-            type="text"
-            className="border w-full p-2 mt-2 placeholder-gray-400 rounded-md"
-            placeholder="Nombre del Cliente"
-            value={cliente}
-            onChange={e => setCliente(e.target.value)}
-            />
-          <input type="submit" value='Crear proyecto' className="bg-sky-600 py-3 uppercase font-bold text-white rounded cursor-pointer bg-sky-700 transition-colors" />
+          id="cliente"
+          type="text"
+          className="border w-full p-2 mt-2 placeholder-gray-400 rounded-md"
+          placeholder="Nombre del Cliente"
+          value={cliente}
+          onChange={(e) => setCliente(e.target.value)}
+        />
+        <input
+          type="submit"
+          value="Crear proyecto"
+          className="bg-sky-600 w-full p-3 my-3 uppercase font-bold text-white rounded cursor-pointer hover:bg-sky-700 transition-colors"
+        />
       </div>
     </form>
   );
