@@ -1,5 +1,6 @@
 import { useState, useEffect, createContext } from "react";
 import clienteAxios from "../config/clienteAxios";
+import {useNavigate} from 'react-router-dom'
 
 const ProyectosContext = createContext();
 
@@ -7,6 +8,8 @@ const ProyectosProvider = ({ children }) => {
 
   const [proyectos, setProyectos] = useState([])
   const [alerta, setAlerta] = useState([])
+
+  const navigate = useNavigate()
 
   const mostrarAlerta = (alerta) =>{
     setAlerta(alerta)
@@ -17,7 +20,34 @@ const ProyectosProvider = ({ children }) => {
 
   const submitProyecto = async(proyecto) =>{
     //ACA RECIBIMOS LA INFO QUE TIENE LOS STATES EN EL FORMULARIO
-    
+
+    try {
+      const token = localStorage.getItem('token')
+
+      if(!token) return
+
+      const config = {
+        headers:{
+          'Content-type': 'application/json',
+          Authorization: `Bearer ${token}`
+        }
+      }
+
+      const {data} = await clienteAxios.post('/proyectos', proyecto, config)
+      console.log(data)
+      setAlerta({
+        msg:'Poryecto creado Correctamente.',
+        error: false
+      })
+
+      setTimeout(() =>{
+        setAlerta({})
+        navigate('/proyectos')
+      }, 3000)
+       
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   return (
