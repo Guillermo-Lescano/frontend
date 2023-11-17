@@ -11,6 +11,7 @@ import NuevoPassword from "./paginas/NuevoPassword";
 import ConfirmarCuenta from "./paginas/ConfirmarCuenta";
 import Proyectos from "./paginas/Proyectos";
 import NuevoProyecto from "./paginas/NuevoProyecto";
+import Proyecto from "./paginas/Proyecto";
 
 import { AuthProvider } from "./context/AuthProvider";
 import { ProyectosProvider } from "./context/ProyectosProvider";
@@ -32,6 +33,7 @@ const App = () => {
             <Route path="/proyectos" element={<RutaProtegida />}> //este componente lo que hace es tene rla logica para proteger a los proximos componentes
               <Route index element={<Proyectos />} />
               <Route path='crear-proyecto' element={<NuevoProyecto />} />
+              <Route path=':id' element={<Proyecto />} />
             </Route>
           </Routes>
         </ProyectosProvider>
