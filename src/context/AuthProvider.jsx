@@ -33,7 +33,7 @@ const AuthProvider = ({ children }) => {
         //este perfil requiere en el back (porque esta protegida esa ruta), requiere la autenticacion y el bearerToken, lo mandamos como configuraicon
         //data nos traew email, nombre e id, osea el perfil del usuario logeado
         setAuth(data); //guardamos el perfil en el stado auth
-        navigate('/proyectos') //esto sirve por si tiene token, para no volver a logear, directamente te lleva a la pagina de proyectos
+        //navigate('/proyectos') //esto sirve por si tiene token, para no volver a logear, directamente te lleva a la pagina de proyectos
       } catch (error) {
         setAuth({})
       } finally {

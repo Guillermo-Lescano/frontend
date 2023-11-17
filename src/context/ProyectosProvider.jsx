@@ -88,7 +88,7 @@ const ProyectosProvider = ({ children }) => {
       }
 
       const { data } = await clienteAxios(`/proyectos/${id}`, config)
-      console.log(data.proyecto)
+      console.log(data)
 
     } catch (error) {
       console.log(error)
