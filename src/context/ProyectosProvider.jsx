@@ -57,6 +57,9 @@ const ProyectosProvider = ({ children }) => {
       }
 
       const {data} = await clienteAxios.post('/proyectos', proyecto, config)
+
+      setProyectos([...proyectos, data]) //tomamos la copia de los proyectos actuales y le agregamos el nuevo proyecto nos ahorramos consultar la db
+
       setAlerta({
         msg:'Poryecto creado Correctamente.',
         error: false
