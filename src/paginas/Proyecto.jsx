@@ -13,6 +13,7 @@ const Proyecto = () => {
   const { nombre } = proyecto;
 
   return (
+    cargando ? ('...') : (
     <div>
       <h1 className="font-black text-4xl">{nombre}</h1>
       <div>
@@ -32,6 +33,7 @@ const Proyecto = () => {
         </svg>
       </div>
     </div>
+    )
   );
 };
 
