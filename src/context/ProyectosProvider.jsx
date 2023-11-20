@@ -45,9 +45,9 @@ const ProyectosProvider = ({ children }) => {
     //ACA RECIBIMOS LA INFO QUE TIENE LOS STATES EN EL FORMULARIO
     console.log(proyecto);
     if (proyecto.id) {
-      editandoProyecto(proyecto);
+      await editandoProyecto(proyecto);
     } else {
-      nuevoProyecto(proyecto);
+      await nuevoProyecto(proyecto);
     }
     return;
   };
@@ -70,7 +70,7 @@ const ProyectosProvider = ({ children }) => {
       setProyectos([...proyectos, data]); //tomamos la copia de los proyectos actuales y le agregamos el nuevo proyecto nos ahorramos consultar la db
 
       setAlerta({
-        msg: "Poryecto creado Correctamente.",
+        msg: "Proyecto Creado Correctamente.",
         error: false,
       });
 
@@ -93,16 +93,30 @@ const ProyectosProvider = ({ children }) => {
           Authorization: `Bearer ${token}`,
         },
       };
-      const { data } = clienteAxios.put(
+      const { data } = await clienteAxios.put(
         `proyectos/${proyecto.id}`,
         proyecto,
         config
       );
       //sincronizar el state
+      const proyectosActualizados = proyectos.map(proyectoState => proyectoState._id === data._id ? data : proyectoState)
+      console.log('LLego?')
+      setProyectos(proyectosActualizados)
+
+      console.log('LLego?')
 
       //mostrar la alerta
+      setAlerta({
+        msg: "Proyecto actualizado Correctamente.",
+        error: false
+      });
 
       //redireccionar
+      setTimeout(() => {
+        setAlerta({});
+        navigate("/proyectos");
+      }, 3000);
+
     } catch (error) {
       console.log(error);
     }
