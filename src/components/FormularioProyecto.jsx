@@ -16,16 +16,15 @@ const FormularioProyecto = () => {
   const { mostrarAlerta, alerta, submitProyecto, proyecto } = useProyectos();
 
   useEffect(() => {
-    if(params.id){
-      setId(proyecto._id)
-      setNombre(proyecto.nombre)
-      setDescripcion(proyecto.descripcion)
-      setFechaEntrega(proyecto.fechaEntrega?.split('T')[0])
-      setCliente(proyecto.cliente)
+    if (params.id) {
+      setId(proyecto._id);
+      setNombre(proyecto.nombre);
+      setDescripcion(proyecto.descripcion);
+      setFechaEntrega(proyecto.fechaEntrega?.split("T")[0]);
+      setCliente(proyecto.cliente);
     } else {
-
     }
-  },[params])
+  }, [params]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -38,7 +37,8 @@ const FormularioProyecto = () => {
       return;
     }
     //Pasar los datos al Provider
-    await submitProyecto({ nombre, descripcion, fechaEntrega, cliente });
+    await submitProyecto({ id, nombre, descripcion, fechaEntrega, cliente });
+    setId(null);
     setNombre("");
     setDescripcion("");
     setFechaEntrega("");
@@ -117,7 +117,7 @@ const FormularioProyecto = () => {
         />
         <input
           type="submit"
-          value={id ? 'Actualizar' : 'Crear Proyecto'}
+          value={id ? "Actualizar" : "Crear Proyecto"}
           className="bg-sky-600 w-full p-3 my-3 uppercase font-bold text-white rounded cursor-pointer hover:bg-sky-700 transition-colors"
         />
       </div>
