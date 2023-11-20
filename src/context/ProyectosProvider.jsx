@@ -157,10 +157,12 @@ const ProyectosProvider = ({ children }) => {
       }
 
       const { data } = await clienteAxios.delete(`/proyectos/${id}`, config)
-      setProyecto([...proyectos, data])
+      //sincronizar el state cuando se elimina se utiliza un filter
+      const proyectosActualizados = proyectos.filter(proyectoState => proyectoState._id !== id)
+      setProyectos(proyectosActualizados)
 
       setAlerta({
-        msg: "Proyecto Eliminado Correctamente.",
+        msg: data.msg,
         error: false,
       });
 
