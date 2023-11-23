@@ -2,11 +2,17 @@ import { Fragment, useState, useEffect } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import useProyectos from "../hooks/useProyectos";
 import Alert from "./Alert";
+import { useParams } from "react-router-dom";
 
 const ModalFormularioTarea = () => {
   const [nombre, setNombre] = useState("");
+  const [fechaEntrega, setFechaEntrega] = useState("");
   const [descripcion, setDescripcion] = useState("");
   const [prioridad, setPrioridad] = useState("");
+
+  //el formulario en el back nos pide que enviemos el proyecto al cual le estamos asigando la tarea, como al proyecto lo tenemos
+  //con un Id que es el params que nos sale en la url, lo sacamos con el useParams
+  const params = useParams()
 
   const { modalFormularioTarea, handleModalTarea, mostrarAlerta, alerta, submitTarea} = useProyectos();
 
@@ -15,14 +21,14 @@ const ModalFormularioTarea = () => {
   const handleSubmit = e => {
     e.preventDefault()
 
-    if([nombre, descripcion, prioridad].includes('')){
+    if([nombre,fechaEntrega, descripcion, prioridad].includes('')){
         mostrarAlerta({
             msg:'Todos los campos son necesarios',
             error: true
         })
     }
 
-    submitTarea({nombre, descripcion, prioridad})
+    submitTarea({nombre,fechaEntrega, descripcion, prioridad, proyecto: params.id})
 
   }
 
@@ -127,6 +133,21 @@ const ModalFormularioTarea = () => {
                         className="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
                         value={descripcion}
                         onChange={(e) => setDescripcion(e.target.value)}
+                      />
+                    </div>
+                    <div className="mb-5">
+                      <label
+                        htmlFor="fecha-entrega"
+                        className="text-gray-700 uppercase font-bold text-sm"
+                      >
+                        Fecha de entrega
+                      </label>
+                      <input
+                        type="date"
+                        id="fecha-entrega"
+                        className="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
+                        value={fechaEntrega}
+                        onChange={(e) => setFechaEntrega(e.target.value)}
                       />
                     </div>
                     <div className="mb-5">
