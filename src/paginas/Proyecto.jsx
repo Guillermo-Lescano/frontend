@@ -5,7 +5,7 @@ import ModalFormularioTarea from "../components/ModalFormularioTarea";
 
 const Proyecto = () => {
   const params = useParams();
-  const { obtenerProyecto, proyecto, cargando } = useProyectos();
+  const { obtenerProyecto, proyecto, cargando, handleModalTarea } = useProyectos();
 
   const [modal, setModal] = useState(false)
 
@@ -45,7 +45,7 @@ const Proyecto = () => {
         </div>
       </div>
       <button
-      onClick={() => setModal(true)}
+      onClick={handleModalTarea}
         type="button"
         className="text-sm px-5 py-3 mt-5 w-full md:w-auto rounded-lg uppercase font-bold
          bg-sky-400 text-white text-center flex gap-2 items-center justify-center"
@@ -66,7 +66,7 @@ const Proyecto = () => {
         </svg>
         Nueva Tarea
       </button>
-      <ModalFormularioTarea modal = { modal} setModal = {setModal} />
+      <ModalFormularioTarea />
     </>
   );
 };
