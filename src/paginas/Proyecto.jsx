@@ -8,8 +8,6 @@ const Proyecto = () => {
   const params = useParams();
   const { obtenerProyecto, proyecto, cargando, handleModalTarea } = useProyectos();
 
-  const [modal, setModal] = useState(false)
-
   useEffect(() => {
     obtenerProyecto(params.id);
   }, []);

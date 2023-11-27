@@ -14,7 +14,11 @@ const ModalFormularioTarea = () => {
   //con un Id que es el params que nos sale en la url, lo sacamos con el useParams
   const params = useParams()
 
-  const { modalFormularioTarea, handleModalTarea, mostrarAlerta, alerta, submitTarea} = useProyectos();
+  const { modalFormularioTarea, handleModalTarea, mostrarAlerta, alerta, submitTarea, tarea} = useProyectos();
+
+  useEffect(() =>{
+    
+  },[tarea]) //Cambio de tarea asi puedo abrir o cerrar el modal
 
   const PRIORIDAD = ["Baja", "Media", "Alta"];
 
