@@ -5,6 +5,7 @@ import Alert from "./Alert";
 import { useParams } from "react-router-dom";
 
 const ModalFormularioTarea = () => {
+  const [id, setId] = useState("");
   const [nombre, setNombre] = useState("");
   const [fechaEntrega, setFechaEntrega] = useState("");
   const [descripcion, setDescripcion] = useState("");
@@ -12,37 +13,62 @@ const ModalFormularioTarea = () => {
 
   //el formulario en el back nos pide que enviemos el proyecto al cual le estamos asigando la tarea, como al proyecto lo tenemos
   //con un Id que es el params que nos sale en la url, lo sacamos con el useParams
-  const params = useParams()
+  const params = useParams();
 
-  const { modalFormularioTarea, handleModalTarea, mostrarAlerta, alerta, submitTarea, tarea} = useProyectos();
+  const {
+    modalFormularioTarea,
+    handleModalTarea,
+    mostrarAlerta,
+    alerta,
+    submitTarea,
+    tarea,
+  } = useProyectos();
 
-  useEffect(() =>{
-    
-  },[tarea]) //Cambio de tarea asi puedo abrir o cerrar el modal
+  useEffect(() => {
+    if (tarea?._id) {
+      setId(tarea._id);
+      setNombre(tarea.nombre);
+      setDescripcion(tarea.descripcion);
+      setFechaEntrega(tarea.fechaEntrega.split("T")[0]);
+      setPrioridad(tarea.prioridad);
+      return;
+    }
+
+    setId("");
+    setNombre("");
+    setDescripcion("");
+    setFechaEntrega("");
+    setPrioridad("");
+  }, [tarea]); //Cambio de tarea asi puedo abrir o cerrar el modal
 
   const PRIORIDAD = ["Baja", "Media", "Alta"];
 
-  const handleSubmit = async e => {
-    e.preventDefault()
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-    if([nombre,fechaEntrega, descripcion, prioridad].includes('')){
-        mostrarAlerta({
-            msg:'Todos los campos son necesarios',
-            error: true
-        })
+    if ([nombre, fechaEntrega, descripcion, prioridad].includes("")) {
+      mostrarAlerta({
+        msg: "Todos los campos son necesarios",
+        error: true,
+      });
     }
 
-    await submitTarea({nombre,fechaEntrega, descripcion, prioridad, proyecto: params.id})
+    await submitTarea({
+      nombre,
+      fechaEntrega,
+      descripcion,
+      prioridad,
+      proyecto: params.id,
+    });
 
-    setNombre('')
-    setDescripcion('')
-    setFechaEntrega('')
-    setPrioridad('')
+    setNombre("");
+    setDescripcion("");
+    setFechaEntrega("");
+    setPrioridad("");
+  };
 
-  }
+  const { msg } = alerta;
 
-  const {msg} = alerta
- 
   return (
     <Transition.Root show={modalFormularioTarea} as={Fragment}>
       <Dialog
@@ -109,9 +135,9 @@ const ModalFormularioTarea = () => {
                     as="h3"
                     className="text-lg leading-6 font-bold text-gray-900"
                   >
-                    Crear Tarea
+                    {id? 'Editar Tarea' : 'Crear Tarea'}
                   </Dialog.Title>
-                  {msg && <Alert alerta={alerta}/>}
+                  {msg && <Alert alerta={alerta} />}
                   <form onSubmit={handleSubmit} className="my-10">
                     <div className="mb-5">
                       <label
@@ -182,7 +208,7 @@ const ModalFormularioTarea = () => {
                       type="submit"
                       className="bg-sky-600 hover:bg-sky-700 w-full p-3 text-white uppercase font-bold cursor-pointer 
                     transition-colors rounded text-sm"
-                      value="Crear Tarea"
+                      value={id? 'Guardar Cambios' : 'Crear Tarea'}
                     />
                   </form>
                 </div>
