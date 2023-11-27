@@ -18,7 +18,7 @@ const ModalFormularioTarea = () => {
 
   const PRIORIDAD = ["Baja", "Media", "Alta"];
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault()
 
     if([nombre,fechaEntrega, descripcion, prioridad].includes('')){
@@ -28,7 +28,12 @@ const ModalFormularioTarea = () => {
         })
     }
 
-    submitTarea({nombre,fechaEntrega, descripcion, prioridad, proyecto: params.id})
+    await submitTarea({nombre,fechaEntrega, descripcion, prioridad, proyecto: params.id})
+
+    setNombre('')
+    setDescripcion('')
+    setFechaEntrega('')
+    setPrioridad('')
 
   }
 
