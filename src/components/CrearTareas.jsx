@@ -1,10 +1,9 @@
-import React from "react";
 import { formatearFecha } from "../helpers/formatearFecha";
 import useProyectos from "../hooks/useProyectos";
 
 const CrearTareas = ({ tarea }) => {
 
-    const { handleModalEditarTarea } = useProyectos()
+  const { handleModalEditarTarea } = useProyectos()
   const { descripcion, nombre, prioridad, fechaEntrega, estado, _id } = tarea;
   return (
     <div className="border-b p-5 flex justify-between items-center">

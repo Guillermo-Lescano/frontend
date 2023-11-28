@@ -21,7 +21,7 @@ const ModalFormularioTarea = () => {
     mostrarAlerta,
     alerta,
     submitTarea,
-    tarea,
+    tarea
   } = useProyectos();
 
   useEffect(() => {
@@ -58,7 +58,7 @@ const ModalFormularioTarea = () => {
       fechaEntrega,
       descripcion,
       prioridad,
-      proyecto: params.id,
+      proyecto: params.id
     });
 
     setNombre("");

@@ -45,7 +45,6 @@ const ProyectosProvider = ({ children }) => {
 
   const submitProyecto = async (proyecto) => {
     //ACA RECIBIMOS LA INFO QUE TIENE LOS STATES EN EL FORMULARIO
-    console.log(proyecto);
     if (proyecto.id) {
       await editandoProyecto(proyecto);
     } else {
@@ -102,10 +101,7 @@ const ProyectosProvider = ({ children }) => {
       );
       //sincronizar el state
       const proyectosActualizados = proyectos.map(proyectoState => proyectoState._id === data._id ? data : proyectoState)
-      console.log('LLego?')
       setProyectos(proyectosActualizados)
-
-      console.log('LLego?')
 
       //mostrar la alerta
       setAlerta({
@@ -184,6 +180,7 @@ const ProyectosProvider = ({ children }) => {
   }
 
   const submitTarea = async(tarea) =>{
+
     try {
       const token = localStorage.getItem('token')
       if(!token) return
@@ -195,7 +192,7 @@ const ProyectosProvider = ({ children }) => {
       }
 
       const { data } = await clienteAxios.post('/tareas', tarea, config)
-
+  
       //agrega la tarea al state
       const proyectoActualizado = {
         ...proyecto
