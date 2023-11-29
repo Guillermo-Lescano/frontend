@@ -248,7 +248,7 @@ const ProyectosProvider = ({ children }) => {
     setModalFormularioTarea(true)
   }
 
-  const handleModalEliminarTarea = tarea =>{
+  const handleModalEliminarTarea = tarea => {
     setTarea(tarea)
     setModalEliminarTarea(!modalEliminarTarea)
   }
