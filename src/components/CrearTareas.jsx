@@ -3,7 +3,7 @@ import useProyectos from "../hooks/useProyectos";
 
 const CrearTareas = ({ tarea }) => {
 
-  const { handleModalEditarTarea } = useProyectos()
+  const { handleModalEditarTarea , handleModalEliminarTarea } = useProyectos()
   const { descripcion, nombre, prioridad, fechaEntrega, estado, _id } = tarea;
   return (
     <div className="border-b p-5 flex justify-between items-center">
@@ -26,7 +26,7 @@ const CrearTareas = ({ tarea }) => {
             Incompleta
           </button>
         )}
-        <button className="bg-red-600 px-4 py-3 text-white uppercase font-bold rounded-lg">
+        <button onClick={handleModalEliminarTarea} className="bg-red-600 px-4 py-3 text-white uppercase font-bold rounded-lg">
           Eliminar
         </button>
       </div>
