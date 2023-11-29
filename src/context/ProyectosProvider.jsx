@@ -180,7 +180,14 @@ const ProyectosProvider = ({ children }) => {
   }
 
   const submitTarea = async(tarea) =>{
+    if(tarea?.id){
+      await editarTarea(tarea)
+    }else{
+      await crearTarea(tarea)
+    }
+  }
 
+  const crearTarea = async tarea => {
     try {
       const token = localStorage.getItem('token')
       if(!token) return
@@ -206,6 +213,34 @@ const ProyectosProvider = ({ children }) => {
       console.log(error)
     }
   }
+
+  const editarTarea = async tarea =>{
+    try {
+      const token = localStorage.getItem('token')
+      if(!token) return
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`
+        }
+      }
+
+      const {data} = await clienteAxios.put(`/tareas/${tarea.id}`, tarea, config)
+      
+      //TODO: Actualizar el DOM
+
+      const proyectoActualizado = {...proyecto}
+      proyectoActualizado.tareas = proyectoActualizado.tareas.map( tareaState => tareaState._id === data._id ? data : tareaState )
+
+      setProyecto(proyectoActualizado)
+      setAlerta({})
+      setModalFormularioTarea(false)
+      
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
 
   const handleModalEditarTarea = tarea => {
     setTarea(tarea)
