@@ -26,7 +26,9 @@ const CrearTareas = ({ tarea }) => {
             Incompleta
           </button>
         )}
-        <button  className="bg-red-600 px-4 py-3 text-white uppercase font-bold rounded-lg" onClick={handleModalEliminarTarea}>
+        <button 
+          className="bg-red-600 px-4 py-3 text-white uppercase font-bold rounded-lg" 
+          onClick={() => handleModalEliminarTarea(tarea)}>
           Eliminar
         </button>
       </div>
