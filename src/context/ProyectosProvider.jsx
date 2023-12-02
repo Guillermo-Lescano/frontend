@@ -272,12 +272,9 @@ const ProyectosProvider = ({ children }) => {
       //TODO: Actualizar el DOM
 
       const proyectoActualizado = {...proyecto}
-      proyectoActualizado.tareas = proyectoActualizado.tareas.filter(tareaState =>{
-        tareaState._id !== tarea._id
-      })
+      proyectoActualizado.tareas = proyectoActualizado.tareas.filter(tareaState => tareaState._id !== tarea._id )
       
       setProyecto(proyectoActualizado)
-  
       setModalEliminarTarea(false)
       setTarea({})
       setTimeout(() => {

@@ -19,7 +19,7 @@ const Proyecto = () => {
 
   if (cargando) return "Cargando...";
 
-  const {msg} = alerta
+  const { msg } = alerta
 
   return (
     <>
