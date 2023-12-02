@@ -4,10 +4,11 @@ import useProyectos from "../hooks/useProyectos";
 import ModalFormularioTarea from "../components/ModalFormularioTarea";
 import ModalEliminarTarea from "../components/ModalEliminarTarea";
 import CrearTareas from "../components/CrearTareas";
+import Alert from "../components/Alert";
 
 const Proyecto = () => {
   const params = useParams();
-  const { obtenerProyecto, proyecto, cargando, handleModalTarea } = useProyectos();
+  const { obtenerProyecto, proyecto, cargando, handleModalTarea, alerta } = useProyectos();
 
   useEffect(() => {
     obtenerProyecto(params.id);
@@ -17,6 +18,8 @@ const Proyecto = () => {
   console.log(proyecto.tareas)
 
   if (cargando) return "Cargando...";
+
+  const {msg} = alerta
 
   return (
     <>
@@ -68,6 +71,7 @@ const Proyecto = () => {
         Nueva Tarea
       </button>
       <p className="font-bold text-xl mt-10">Tareas del proyecto</p>
+      {msg && <Alert alerta={alerta} />}
       <div className="bg-white shadow mt-10 rounded-lg">
         {proyecto.tareas?.length ? 
           proyecto.tareas?.map( tarea => (
