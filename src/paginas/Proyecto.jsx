@@ -71,7 +71,11 @@ const Proyecto = () => {
         Nueva Tarea
       </button>
       <p className="font-bold text-xl mt-10">Tareas del proyecto</p>
-      {msg && <Alert alerta={alerta} />}
+      <div className="flex justify-center">
+        <div className="w-full md:w-1/3 lg:w-1/4">
+        {msg && <Alert alerta={alerta} />}
+        </div>
+      </div>
       <div className="bg-white shadow mt-10 rounded-lg">
         {proyecto.tareas?.length ? 
           proyecto.tareas?.map( tarea => (
