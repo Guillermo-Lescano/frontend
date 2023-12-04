@@ -1,9 +1,22 @@
+import { useEffect } from "react"
 import FormularioColaborador from "../components/FormularioColaborador"
+import useProyectos from "../hooks/useProyectos"
+import { useParams } from "react-router-dom"
 
 const NuevoColaborador = () => {
+    
+  const { obtenerProyecto, proyecto, cargando } = useProyectos()
+  const params = useParams()
+
+    useEffect(() => {
+      obtenerProyecto(params.id)
+    }, [])
+
+    if(cargando) return 'cargando..'
+
   return (
     <>
-        <h1 className="text-4xl font-black">Añadir colaborador</h1>
+        <h1 className="text-4xl font-black">Añadir colaborador al proyecto: {proyecto.nombre}</h1>
         <div className="mt-10 flex justify-center">
             <FormularioColaborador />
         </div>

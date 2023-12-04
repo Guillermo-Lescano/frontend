@@ -5,10 +5,10 @@ import Alert from "./Alert";
 const FormularioColaborador = () => {
   const [email, setEmail] = useState("");
 
-  const {alerta, mostrarAlerta} = useProyectos()
+  const {alerta, mostrarAlerta, submitColaborador} = useProyectos()
 
-  const handleSubmit = () => {
-    e.preventDefault
+  const handleSubmit = (e) => {
+    e.preventDefault()
 
     if(email === ''){
         mostrarAlerta({
@@ -17,13 +17,15 @@ const FormularioColaborador = () => {
         })
         return
     }
+    submitColaborador(email)
   }
+  
 
   const { msg } = alerta
 
   return (
     <form onSubmit={handleSubmit} className="bg-white py-10 px-5 md:w-1/2 rounded-lg shadow">
-        {msg && <Alert />}
+      {msg && <Alert alerta={alerta} />}
       <div className="mb-5">
         <label
           htmlFor="email"

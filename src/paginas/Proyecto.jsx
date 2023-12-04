@@ -15,7 +15,7 @@ const Proyecto = () => {
   }, []);
 
   const { nombre } = proyecto;
-  console.log(proyecto.tareas)
+  console.log({proyecto})
 
   if (cargando) return "Cargando...";
 
@@ -90,7 +90,7 @@ const Proyecto = () => {
       <div className="flex items-center justify-between mt-10">
         <p className="font-bold text-xl">Colaboradores</p>
         <Link
-          to={`/proyectos/nuevo-colaborador/${proyecto.id}`}
+          to={`/proyectos/nuevo-colaborador/${proyecto._id}`}
           className="text-gray-400 uppercase font-bold hover:text-black"
         >
           Añadir

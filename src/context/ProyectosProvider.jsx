@@ -29,11 +29,11 @@ const ProyectosProvider = ({ children }) => {
         const { data } = await clienteAxios("/proyectos", config);
         setProyectos(data);
       } catch (error) {
-        console.log(error.response.data.msg);
+        console.log('error', error);
       }
     };
     obtenerProyectos();
-  }, []);
+  }, [])
 
   const navigate = useNavigate();
 
