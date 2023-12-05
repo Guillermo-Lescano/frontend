@@ -2,16 +2,19 @@ import { useEffect } from "react"
 import FormularioColaborador from "../components/FormularioColaborador"
 import useProyectos from "../hooks/useProyectos"
 import { useParams } from "react-router-dom"
+import Alert from "../components/Alert"
 
 const NuevoColaborador = () => {
     
-  const { obtenerProyecto, proyecto, cargando, colaborador, agregarColaborador } = useProyectos()
+  const { obtenerProyecto, proyecto, cargando, colaborador, agregarColaborador, alerta } = useProyectos()
   const params = useParams()
 
     useEffect(() => {
       obtenerProyecto(params.id)
     }, [])
 
+
+    if(!proyecto._id) return <Alert alerta={alerta} />
 
   return (
     <>
